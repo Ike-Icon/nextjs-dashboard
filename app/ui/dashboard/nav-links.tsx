@@ -4,6 +4,7 @@ import {
   UserGroupIcon,
   HomeIcon,
   DocumentDuplicateIcon,
+  NewspaperIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -19,8 +20,19 @@ const links = [
     icon: DocumentDuplicateIcon,
   },
   { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
+  { name: 'Blog', href: '/dashboard/blog', icon: NewspaperIcon },
 ];
 
+
+// 
+// NavLinks component for rendering navigation links in the dashboard.//+
+//  
+//  * This component generates a list of navigation links based on the predefined//+
+//  * `links` array. It uses Next.js's Link component for client-side navigation//+
+//  * and applies dynamic styling based on the current pathname.//+
+//  
+//  * @returns {JSX.Element} A React fragment containing a list of navigation links.//+
+//  
 export default function NavLinks() {
   const pathname = usePathname();
 
@@ -29,7 +41,7 @@ export default function NavLinks() {
       {links.map((link) => {
         const LinkIcon = link.icon;
         return (
-          <a
+          <Link
             key={link.name}
             href={link.href}
             className={clsx(
@@ -41,9 +53,10 @@ export default function NavLinks() {
           >
             <LinkIcon className="w-6" />
             <p className="hidden md:block">{link.name}</p>
-          </a>
+          </Link>
         );
       })}
     </>
   );
 }
+
